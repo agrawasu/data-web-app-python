@@ -64,10 +64,8 @@ filtered = data[
 hist = np.histogram(filtered['date/time'].dt.minute, bins=60, range=(0, 60))[0]
 chart_data = pd.DataFrame({'minute': range(60), 'crashes': hist})
 
-# Plotly bar chart
-fig = px.bar(chart_data, x='minute', y='crashes', labels={'minute': 'Minute', 'crashes': 'Number of Crashes'},
-             title='Number of Crashes per Minute')
-st.plotly_chart(fig)
+# Streamlit bar chart
+st.bar_chart(chart_data.set_index('minute'))
 
 st.header('Top 10 dangerous streets by affected people')
 select = st.selectbox('Affected type of person', ['Pedestrians', 'Cyclists', 'Motorists'])
